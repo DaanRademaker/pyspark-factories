@@ -129,9 +129,7 @@ def test_get_field_value():
     value = TestFactory.get_field_value(StructField("short", ShortType(), False))
     assert value == -30824
 
-    value = TestFactory.get_field_value(
-        StructField("integer_type", IntegerType(), False)
-    )
+    value = TestFactory.get_field_value(StructField("integer_type", IntegerType(), False))
     assert value == -1262298496
 
     value = TestFactory.get_field_value(StructField("long", LongType(), False))
@@ -143,9 +141,7 @@ def test_get_field_value():
     value = TestFactory.get_field_value(StructField("double", DoubleType(), False))
     assert value == 8607.69886387695
 
-    value = TestFactory.get_field_value(
-        StructField("array", ArrayType(IntegerType(), False), False)
-    )
+    value = TestFactory.get_field_value(StructField("array", ArrayType(IntegerType(), False), False))
     assert value == [-596319138, -622419416, -338168573, -1020823058]
 
     value = TestFactory.get_field_value(
@@ -162,9 +158,7 @@ def test_get_field_value():
     assert value == {"nested_deep": -590182562}
 
     TestFactory.should_set_none_value = lambda _: True
-    value = TestFactory.get_field_value(
-        StructField("integer_type", IntegerType(), True)
-    )
+    value = TestFactory.get_field_value(StructField("integer_type", IntegerType(), True))
     assert not value
 
 
@@ -173,23 +167,17 @@ def test_should_set_none_value():
         pass
 
     TestFactory.__allow_none_optionals__ = False
-    set_none_value = TestFactory.should_set_none_value(
-        model_field=StructField("integer_type", IntegerType(), True)
-    )
+    set_none_value = TestFactory.should_set_none_value(model_field=StructField("integer_type", IntegerType(), True))
 
     assert not set_none_value
 
-    with patch(
-        "pyspark_factories.factory.create_random_boolean"
-    ) as patched_created_random_boolean:
+    with patch("pyspark_factories.factory.create_random_boolean") as patched_created_random_boolean:
 
         patched_created_random_boolean.return_value = True
 
         # Structfield allows nullable so should be True
         TestFactory.__allow_none_optionals__ = True
-        set_none_value = TestFactory.should_set_none_value(
-            model_field=StructField("integer_type", IntegerType(), True)
-        )
+        set_none_value = TestFactory.should_set_none_value(model_field=StructField("integer_type", IntegerType(), True))
         assert set_none_value
 
         # Structfield does not allow nullable so should always be False

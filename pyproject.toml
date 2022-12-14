@@ -21,6 +21,29 @@ isort = "^5.10.1"
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.black]
+line-length = 120
+target-version = ["py39"]
+
+[tool.pytest.ini_options]
+addopts = "--junitxml=junit/report.xml"
+testpaths = ["tests"]
+
+[tool.coverage.report]
+omit = ["tests/*", ".venv/*"]
+show_missing = true
+precision = 2
+
+[tool.coverage.run]
+command_line = "-m pytest -v tests/"
+omit = ["tests/*",".venv/*"]
+source = ["."]
+
 [tool.flake8]
 max-line-length = 180
 extend-exclude = ["deploy", ".venv"]
+extend-ignore = "E203"
+
+[tool.isort]
+profile = "black"
+line_length = 120

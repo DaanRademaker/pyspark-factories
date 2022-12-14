@@ -19,9 +19,7 @@ def handle_decimal(field: StructField) -> Decimal:
     max_digits_before_dot = precision - scale
 
     if max_digits_before_dot <= 0:
-        raise ValueError(
-            "Cannot generate a Decimal for which the scale is higher than or equal to the precision"
-        )
+        raise ValueError("Cannot generate a Decimal for which the scale is higher than or equal to the precision")
 
     random_digits_before_dot = random.randint(1, max_digits_before_dot)
     max_integer_range_before_dot = 10**random_digits_before_dot - 1
@@ -32,9 +30,7 @@ def handle_decimal(field: StructField) -> Decimal:
     # if there are digits after . generate different number
     if scale > 0:
         random_scale_range = random.randint(1, scale)
-        random_scale_integer_range = int(
-            str(max_integer_range_scale)[0:random_scale_range]
-        )
+        random_scale_integer_range = int(str(max_integer_range_scale)[0:random_scale_range])
         number_after_dot = random.randint(0, random_scale_integer_range)
         return Decimal(f"{number_before_dot}.{number_after_dot}")
 

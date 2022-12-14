@@ -150,9 +150,7 @@ class ModelFactory(ABC):
         """
         model_fields = cls.__model__.fields
 
-        build_fields = [
-            {field.name: cls.get_field_value(field)} for field in model_fields
-        ]
+        build_fields = [{field.name: cls.get_field_value(field)} for field in model_fields]
 
         dict_fields = {}
 
@@ -202,13 +200,9 @@ class ModelFactory(ABC):
             overwrite_keys = overwrite.key.split(".")
 
             try:
-                cls.write_recursive_keys(
-                    generated_fields, overwrite_keys, overwrite.value
-                )
+                cls.write_recursive_keys(generated_fields, overwrite_keys, overwrite.value)
             except KeyError:
-                raise OverwriteException(
-                    "This key does not exist spark schema so there is no value to overwrite"
-                )
+                raise OverwriteException("This key does not exist spark schema so there is no value to overwrite")
 
         return generated_fields
 
