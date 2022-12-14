@@ -1,0 +1,26 @@
+# Compiled Python files
+*.pyc
+
+# Cache files
+__pycache__/
+
+# IDE configuration files
+.idea/
+*.sublime-workspace
+
+# Build files
+build/
+dist/
+
+# Virtual environment files
+venv/
+.env/
+
+# Jupyter notebook files
+*.ipynb_checkpoints/
+
+# Sensitive or untracked files
+.env
+.DS_Store
+
+.vscode

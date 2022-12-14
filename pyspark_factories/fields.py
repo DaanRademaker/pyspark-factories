@@ -1,0 +1,17 @@
+from typing import Any, Callable
+
+
+class Use:
+    """
+    A class used to wrap a callback function alongside args and kwargs.
+    The callback will be invoked whenever building the given factory attribute.
+    """
+
+    def __init__(self, cb: Callable, *args: Any, **defaults: Any) -> None:
+        self.cb = cb
+        self.defaults = defaults
+        self.args = args
+
+    def to_value(self) -> Any:
+        """invokes the callback function"""
+        return self.cb(*self.args, **self.defaults)
