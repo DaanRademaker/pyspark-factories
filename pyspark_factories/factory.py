@@ -5,23 +5,10 @@ from typing import Any, Dict, List, Optional, Type, cast
 
 from faker import Faker
 from pyspark.sql import DataFrame, SparkSession
-from pyspark.sql.types import (
-    ArrayType,
-    BinaryType,
-    BooleanType,
-    ByteType,
-    DateType,
-    DecimalType,
-    DoubleType,
-    FloatType,
-    IntegerType,
-    LongType,
-    ShortType,
-    StringType,
-    StructField,
-    StructType,
-    TimestampType,
-)
+from pyspark.sql.types import (ArrayType, BinaryType, BooleanType, ByteType,
+                               DateType, DecimalType, DoubleType, FloatType,
+                               IntegerType, LongType, ShortType, StringType,
+                               StructField, StructType, TimestampType)
 
 from pyspark_factories.fields import Use
 from pyspark_factories.handlers.decimal import handle_decimal
