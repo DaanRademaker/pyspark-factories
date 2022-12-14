@@ -2,10 +2,23 @@ from datetime import date, datetime
 from decimal import Decimal
 from unittest.mock import patch
 
-from pyspark.sql.types import (ArrayType, BinaryType, BooleanType, ByteType,
-                               DateType, DecimalType, DoubleType, FloatType,
-                               IntegerType, LongType, ShortType, StringType,
-                               StructField, StructType, TimestampType)
+from pyspark.sql.types import (
+    ArrayType,
+    BinaryType,
+    BooleanType,
+    ByteType,
+    DateType,
+    DecimalType,
+    DoubleType,
+    FloatType,
+    IntegerType,
+    LongType,
+    ShortType,
+    StringType,
+    StructField,
+    StructType,
+    TimestampType,
+)
 
 from pyspark_factories.factory import ModelFactory, Overwrite
 
