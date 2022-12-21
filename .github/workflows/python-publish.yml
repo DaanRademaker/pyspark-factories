@@ -1,0 +1,43 @@
+# This workflow will upload a Python Package using Twine when a release is created
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python#publishing-to-package-registries
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Upload Python Package
+
+on: 
+  workflow_dispatch:
+    inputs:
+      bumpLevel:
+        description: 'version level to bump'     
+        required: true
+        default: 'patch'
+
+jobs:
+  publish-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Set up python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+      - name: Bump version
+        run: poetry version  ${{ github.event.inputs.bumpLevel }}
+      - name: publish
+        shell: bash
+        run: |
+          poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
+          poetry publish --build --no-interaction
+      - name: Commit version bump
+        shell: bash
+        run: |
+          git add pyproject.toml
+          git commit -m "bump up $(poetry version) version from workflow"
+          git push
